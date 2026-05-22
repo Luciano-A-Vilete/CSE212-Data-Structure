@@ -1,40 +1,43 @@
 public class Translator
 {
+    // Translate words from one language to another.
+
+    private static Dictionary<string, string> translations = new Dictionary<string, string>();
+
     public static void Run()
     {
-        var englishToGerman = new Translator();
-        englishToGerman.AddWord("House", "Haus");
-        englishToGerman.AddWord("Car", "Auto");
-        englishToGerman.AddWord("Plane", "Flugzeug");
-        Console.WriteLine(englishToGerman.Translate("Car")); // Auto
-        Console.WriteLine(englishToGerman.Translate("Plane")); // Flugzeug
-        Console.WriteLine(englishToGerman.Translate("Train")); // ???
+        AddWord("hello", "hallo");
+        AddWord("world", "welt");
+        AddWord("cat", "katze");
+        AddWord("dog", "hund");
+        AddWord("house", "haus");
+        AddWord("book", "buch");
+        AddWord("water", "wasser");
+        AddWord("friend", "freund");
+
+        Console.WriteLine($"hello  -> {Translate("hello")}");
+        Console.WriteLine($"world  -> {Translate("world")}");
+        Console.WriteLine($"cat    -> {Translate("cat")}");
+        Console.WriteLine($"dog    -> {Translate("dog")}");
+        Console.WriteLine($"house  -> {Translate("house")}");
+        Console.WriteLine($"book   -> {Translate("book")}");
+        Console.WriteLine($"water  -> {Translate("water")}");
+        Console.WriteLine($"friend -> {Translate("friend")}");
+        Console.WriteLine($"car    -> {Translate("car")}");
+        Console.WriteLine($"tree   -> {Translate("tree")}");
     }
 
-    private Dictionary<string, string> _words = new();
-
-    /// <summary>
-    /// Add the translation from 'from_word' to 'to_word'
-    /// For example, in a english to german dictionary:
-    /// 
-    /// my_translator.AddWord("book","buch")
-    /// </summary>
-    /// <param name="fromWord">The word to translate from</param>
-    /// <param name="toWord">The word to translate to</param>
-    /// <returns>fixed array of divisors</returns>
-    public void AddWord(string fromWord, string toWord)
+    private static void AddWord(string word, string translation)
     {
-        // ADD YOUR CODE HERE
+        translations[word] = translation;
     }
 
-    /// <summary>
-    /// Translates the from word into the word that this stores as the translation
-    /// </summary>
-    /// <param name="fromWord">The word to translate</param>
-    /// <returns>The translated word or "???" if no translation is available</returns>
-    public string Translate(string fromWord)
+    private static string Translate(string word)
     {
-        // ADD YOUR CODE HERE
-        return "";
+        if (translations.TryGetValue(word, out string? translation))
+        {
+            return translation;
+        }
+        return "???";
     }
 }
